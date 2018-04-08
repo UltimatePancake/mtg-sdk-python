@@ -13,7 +13,7 @@ from mtgsdk.config import __endpoint__
 from mtgsdk.card import Card
 
 
-class Set(object):
+class Set:
     RESOURCE = 'sets'
 
     def __init__(self, response_dict={}):
@@ -32,18 +32,18 @@ class Set(object):
         self.online_only = response_dict.get('onlineOnly')
 
     @staticmethod
-    def find(id):
-        return QueryBuilder(Set).find(id)
+    async def find(id):
+        return await QueryBuilder(Set).find(id)
 
     @staticmethod
-    def where(**kwargs):
-        return QueryBuilder(Set).where(**kwargs)
+    async def where(**kwargs):
+        return await QueryBuilder(Set).where(**kwargs)
 
     @staticmethod
-    def all():
-        return QueryBuilder(Set).all()
+    async def all():
+        return await QueryBuilder(Set).all()
         
     @staticmethod
-    def generate_booster(code):
+    async def generate_booster(code):
         url = "{}/{}/{}/booster".format(__endpoint__, Set.RESOURCE, code)
-        return QueryBuilder(Set).find_many(url, Card, Card.RESOURCE)
+        return await QueryBuilder(Set).find_many(url, Card, Card.RESOURCE)

@@ -11,7 +11,7 @@
 from mtgsdk.querybuilder import QueryBuilder
 
 
-class Card(object):
+class Card:
     RESOURCE = 'cards'
 
     def __init__(self, response_dict={}):
@@ -56,13 +56,13 @@ class Card(object):
         self.foreign_names = response_dict.get('foreignNames')
 
     @staticmethod
-    def find(id):
-        return QueryBuilder(Card).find(id)
+    async def find(id):
+        return await QueryBuilder(Card).find(id)
 
     @staticmethod
-    def where(**kwargs):
-        return QueryBuilder(Card).where(**kwargs)
+    async def where(**kwargs):
+        return await QueryBuilder(Card).where(**kwargs)
 
     @staticmethod
-    def all():
-        return QueryBuilder(Card).all()
+    async def all():
+        return await QueryBuilder(Card).all()

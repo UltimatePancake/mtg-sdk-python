@@ -14,7 +14,6 @@ from mtgsdk import Changelog
 
 class TestChangelog(unittest.TestCase):
     def test_all_returns_changelogs(self):
-        with vcr.use_cassette('fixtures/changelogs.yaml'):
-            changelogs = Changelog.all()
-            
-            self.assertTrue(len(changelogs) > 1)
+        changelogs = yield from Changelog.all()
+
+        self.assertTrue(len(changelogs) > 1)

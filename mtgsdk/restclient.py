@@ -8,15 +8,14 @@
 # http://www.opensource.org/licenses/MIT-license
 # Copyright (c) 2016, Andrew Backes <backes.andrew@gmail.com>
 
-import json
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError
+import aiohttp
+import traceback
 from urllib.parse import urlencode
 
 
-class RestClient(object):
+class RestClient:
     @staticmethod
-    def get(url, params={}):
+    async def get(url, params={}):
         """Invoke an HTTP GET request on a url
         
         Args:
@@ -31,12 +30,14 @@ class RestClient(object):
             request_url = "{}?{}".format(url, urlencode(params))
 
         try:
-            req = Request(request_url, headers={'User-Agent': 'Mozilla/5.0'})
-            response = json.loads(urlopen(req).read().decode("utf-8"))
+            async with aiohttp.ClientSession() as session:
+                async with session.get(request_url, headers={'User-Agent': 'Mozilla/5.0'}) as response:
+                    result = await response.json()
 
-            return response
-        except HTTPError as err:
-            raise MtgException(err.read())
+            return result
+        except:
+            traceback.print_exc()
+            raise MtgException('Error retrieving data.')
 
 
 class MtgException(Exception):

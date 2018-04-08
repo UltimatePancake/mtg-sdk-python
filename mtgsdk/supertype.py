@@ -11,9 +11,9 @@
 from mtgsdk.querybuilder import QueryBuilder
 
 
-class Supertype(object):
+class Supertype:
     RESOURCE = 'supertypes'
 
     @staticmethod
-    def all():
-        return QueryBuilder(Supertype).array()
+    async def all():
+        return await QueryBuilder(Supertype).array()

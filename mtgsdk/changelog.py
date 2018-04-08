@@ -11,7 +11,7 @@
 from mtgsdk.querybuilder import QueryBuilder
 
 
-class Changelog(object):
+class Changelog:
     RESOURCE = 'changelogs'
     
     def __init__(self, response_dict={}):
@@ -21,5 +21,5 @@ class Changelog(object):
         self.release_date = response_dict.get('releaseDate')
 
     @staticmethod
-    def all():
-        return QueryBuilder(Changelog).all()
+    async def all():
+        return await QueryBuilder(Changelog).all()

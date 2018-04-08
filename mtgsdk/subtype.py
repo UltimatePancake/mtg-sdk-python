@@ -11,9 +11,9 @@
 from mtgsdk.querybuilder import QueryBuilder
 
 
-class Subtype(object):
+class Subtype:
     RESOURCE = 'subtypes'
 
     @staticmethod
-    def all():
-        return QueryBuilder(Subtype).array()
+    async def all():
+        return await QueryBuilder(Subtype).array()

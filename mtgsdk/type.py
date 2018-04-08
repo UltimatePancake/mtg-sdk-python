@@ -15,5 +15,5 @@ class Type(object):
     RESOURCE = 'types'
 
     @staticmethod
-    def all():
-        return QueryBuilder(Type).array()
+    async def all():
+        return await QueryBuilder(Type).array()

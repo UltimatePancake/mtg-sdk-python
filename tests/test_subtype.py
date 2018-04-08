@@ -8,14 +8,12 @@
 # http://www.opensource.org/licenses/MIT-license
 # Copyright (c) 2016, Andrew Backes <backes.andrew@gmail.com>
 
-import vcr
 import unittest
 from mtgsdk import Subtype
 
 class TestSubtype(unittest.TestCase):
     def test_all_returns_subtypes(self):
-        with vcr.use_cassette('fixtures/subtypes.yaml'):
-            subtypes = Subtype.all()
+        subtypes = yield from Subtype.all()
             
-            self.assertTrue(len(subtypes) > 20)
-            self.assertTrue('Warrior' in subtypes)
+        self.assertTrue(len(subtypes) > 20)
+        self.assertTrue('Warrior' in subtypes)
