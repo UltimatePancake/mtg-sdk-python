@@ -23,7 +23,8 @@ tests_require = [
     'ipdb',
     'coveralls',
     'sphinx',
-    'vcrpy'
+    'vcrpy',
+    'aiohttp'
 ]
 
 url='https://github.com/' + __github_username__ + '/' + __github_reponame__
